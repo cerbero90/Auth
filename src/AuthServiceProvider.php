@@ -18,15 +18,11 @@ class AuthServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$authViewsPath = __DIR__.'/../resources/views';
-
-		$authConfigFile = __DIR__.'/../config/auth.php';
-
-		$this->loadViewsFrom($authViewsPath, 'auth');
+		$this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'auth');
 
 		$this->publishes([
-			$authViewsPath => base_path('resources/views/vendor/auth'),
-			$authConfigFile => config_path('vendor/auth/auth.php'),
+			__DIR__.'/../config/_auth.php' => config_path('_auth.php'),
+			__DIR__.'/../database/migrations/' => database_path('migrations'),
 		]);
 
 		include __DIR__.'/../routes.php';
