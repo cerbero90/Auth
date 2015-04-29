@@ -1,7 +1,6 @@
 <?php namespace Cerbero\Auth;
 
 use Cerbero\Workflow\WorkflowServiceProvider;
-use Collective\Html\HtmlServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 /**
