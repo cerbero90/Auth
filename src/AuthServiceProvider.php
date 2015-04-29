@@ -37,7 +37,6 @@ class AuthServiceProvider extends ServiceProvider {
 	{
 		(new WorkflowServiceProvider($this->app))->register();
 
-		(new HtmlServiceProvider($this->app))->register();
 	}
 
 }
