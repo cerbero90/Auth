@@ -24,7 +24,7 @@ class AuthServiceProvider extends ServiceProvider {
 			__DIR__.'/../database/migrations/' => database_path('migrations'),
 		]);
 
-		include __DIR__.'/../routes.php';
+		include __DIR__.'/Http/routes.php';
 	}
 
 	/**
