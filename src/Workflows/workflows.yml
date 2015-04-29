@@ -1,0 +1,10 @@
+Login: {  }
+Logout: {  }
+Register:
+    - Cerbero\Auth\Workflows\Register\Login
+    - Cerbero\Auth\Workflows\Register\Notify
+    - Cerbero\Auth\Workflows\Register\Hash
+Recover:
+    - Cerbero\Auth\Workflows\Recover\Store
+    - Cerbero\Auth\Workflows\Recover\Notify
+Reset: {  }
