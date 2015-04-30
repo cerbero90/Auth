@@ -48,7 +48,10 @@ class AuthController extends Controller {
 	 */
 	public function login()
 	{
-		$this->bus->dispatchFrom('Cerbero\Auth\Commands\LoginCommand', new LoginRequest);
+		$this->bus->dispatchFrom(
+			'Cerbero\Auth\Commands\LoginCommand',
+			app('Cerbero\Auth\Http\Requests\LoginRequest')
+		);
 
 		return redirect('/');
 	}
@@ -92,7 +95,10 @@ class AuthController extends Controller {
 			'Cerbero\Auth\Pipes\Register\Notify',
 			'Cerbero\Auth\Pipes\Register\Hash',
 
-		])->dispatchFrom('Cerbero\Auth\Commands\RegisterCommand', new RegisterRequest);
+		])->dispatchFrom(
+			'Cerbero\Auth\Commands\RegisterCommand',
+			app('Cerbero\Auth\Http\Requests\RegisterRequest')
+		);
 
 		return redirect('/')->withSuccess(trans('auth::register.success'));
 	}
@@ -122,7 +128,10 @@ class AuthController extends Controller {
 			'Cerbero\Auth\Pipes\Recover\Notify',
 			'Cerbero\Auth\Pipes\Recover\Store',
 
-		])->dispatchFrom('Cerbero\Auth\Commands\RecoverCommand', new RecoverRequest);
+		])->dispatchFrom(
+			'Cerbero\Auth\Commands\RecoverCommand',
+			app('Cerbero\Auth\Http\Requests\RecoverRequest')
+		);
 
 		return back()->withSuccess(trans('auth::recover.success'));
 	}
@@ -148,7 +157,10 @@ class AuthController extends Controller {
 	 */
 	public function reset($token)
 	{
-		$this->bus->dispatchFrom('Cerbero\Auth\Commands\ResetCommand', new ResetRequest);
+		$this->bus->dispatchFrom(
+			'Cerbero\Auth\Commands\ResetCommand',
+			app('Cerbero\Auth\Http\Requests\ResetRequest')
+		);
 
 		return redirect()->route('login.index')->withSuccess(trans('reset.success'));
 	}
