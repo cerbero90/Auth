@@ -1,6 +1,6 @@
-<?php namespace Cerbero\Auth\Workflows\Register;
+<?php namespace Cerbero\Auth\Pipes\Register;
 
-use Cerbero\Workflow\Pipes\AbstractPipe;
+use Cerbero\Auth\Pipes\AbstractPipe;
 use Illuminate\Contracts\Auth\Guard;
 
 class Login extends AbstractPipe {

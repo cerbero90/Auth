@@ -1,6 +1,6 @@
-<?php namespace Cerbero\Auth\Workflows\Recover;
+<?php namespace Cerbero\Auth\Pipes\Recover;
 
-use Cerbero\Workflow\Pipes\AbstractPipe;
+use Cerbero\Auth\Pipes\AbstractPipe;
 use Illuminate\Contracts\Mail\Mailer;
 
 class Notify extends AbstractPipe {
