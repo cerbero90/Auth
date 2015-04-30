@@ -1,26 +1,26 @@
 <?php namespace Cerbero\Auth\Http\Controllers;
 
-use Cerbero\Workflow\Workflow;
+use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Routing\Controller;
 
 class AuthController extends Controller {
 
 	/**
 	 * @author	Andrea Marco Sartori
-	 * @var		Workflow	$workflow	The workflows container.
+	 * @var		Illuminate\Contracts\Bus\Dispatcher	$bus	Command bus dispatcher.
 	 */
-	protected $workflow;
+	protected $bus;
 	
 	/**
 	 * Set the dependencies.
 	 *
 	 * @author	Andrea Marco Sartori
-	 * @param	Workflow	$workflow
+	 * @param	Illuminate\Contracts\Bus\Dispatcher	$bus
 	 * @return	void
 	 */
-	public function __construct(Workflow $workflow)
+	public function __construct(Dispatcher $bus)
 	{
-		$this->workflow = $workflow;
+		$this->bus = $bus;
 	}
 
 	/**
@@ -44,7 +44,10 @@ class AuthController extends Controller {
 	 */
 	public function login()
 	{
-		$this->workflow->login();
+		$this->bus->dispatchFrom(
+			'Cerbero\Auth\Commands\LoginCommand',
+			'Cerbero\Auth\Http\Requests\LoginRequest'
+		);
 
 		return redirect('/');
 	}
@@ -57,7 +60,7 @@ class AuthController extends Controller {
 	 */
 	public function logout()
 	{
-		$this->workflow->logout();
+		$this->bus->dispatchNow('Cerbero\Auth\Commands\LogoutCommand');
 
 		return redirect('/');
 	}
@@ -83,7 +86,15 @@ class AuthController extends Controller {
 	 */
 	public function register()
 	{
-		$this->workflow->register();
+		$this->bus->pipeThrough([
+			'Cerbero\Auth\Pipes\Register\Login',
+			'Cerbero\Auth\Pipes\Register\Notify',
+			'Cerbero\Auth\Pipes\Register\Hash',
+
+		])->dispatchFrom(
+			'Cerbero\Auth\Commands\RegisterCommand',
+			'Cerbero\Auth\Http\Requests\RegisterRequest'
+		);
 
 		return redirect('/')->withSuccess(trans('auth::register.success'));
 	}
@@ -109,7 +120,14 @@ class AuthController extends Controller {
 	 */
 	public function recover()
 	{
-		$this->workflow->recover();
+		$this->bus->pipeThrough([
+			'Cerbero\Auth\Pipes\Recover\Notify',
+			'Cerbero\Auth\Pipes\Recover\Store',
+
+		])->dispatchFrom(
+			'Cerbero\Auth\Commands\RecoverCommand',
+			'Cerbero\Auth\Http\Requests\RecoverRequest'
+		);
 
 		return back()->withSuccess(trans('auth::recover.success'));
 	}
@@ -135,7 +153,10 @@ class AuthController extends Controller {
 	 */
 	public function reset($token)
 	{
-		$this->workflow->reset();
+		$this->bus->dispatchFrom(
+			'Cerbero\Auth\Commands\ResetCommand',
+			'Cerbero\Auth\Http\Requests\ResetRequest'
+		);
 
 		return redirect()->route('login.index')->withSuccess(trans('reset.success'));
 	}

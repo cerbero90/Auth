@@ -21,7 +21,7 @@ class EloquentUserRepository implements UserRepositoryInterface {
 	 */
 	public function __construct()
 	{
-		$user = config('_auth.users.model');
+		$user = config('auth.model');
 
 		$this->user = new $user;
 	}

@@ -1,7 +1,6 @@
 <?php namespace Cerbero\Auth;
 
 use Cerbero\Workflow\WorkflowServiceProvider;
-use Collective\Html\HtmlServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -22,10 +21,10 @@ class AuthServiceProvider extends ServiceProvider {
 
 		$this->publishes([
 			__DIR__.'/../config/_auth.php' => config_path('_auth.php'),
-			__DIR__.'/../database/migrations/' => database_path('migrations'),
+			__DIR__.'/../database/migrations/' => base_path('database/migrations'),
 		]);
 
-		include __DIR__.'/../routes.php';
+		include __DIR__.'/Http/routes.php';
 	}
 
 	/**
@@ -35,8 +34,6 @@ class AuthServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		(new WorkflowServiceProvider($this->app))->register();
-
 		$userRepo = 'Cerbero\Auth\Repositories\EloquentUserRepository';
 
 		$this->app->bind('Cerbero\Auth\Repositories\UserRepositoryInterface', $userRepo);
