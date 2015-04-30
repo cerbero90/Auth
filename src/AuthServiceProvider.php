@@ -21,7 +21,7 @@ class AuthServiceProvider extends ServiceProvider {
 
 		$this->publishes([
 			__DIR__.'/../config/_auth.php' => config_path('_auth.php'),
-			__DIR__.'/../database/migrations/' => database_path('migrations'),
+			__DIR__.'/../database/migrations/' => base_path('database/migrations'),
 		]);
 
 		include __DIR__.'/Http/routes.php';
