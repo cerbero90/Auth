@@ -1,13 +1,12 @@
 <?php namespace Cerbero\Auth\Commands;
 
-use Cerbero\Auth\Commands\Command;
 use Cerbero\Auth\Exceptions\DisplayException;
 use Cerbero\Auth\Repositories\Users\UserRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Routing\Router;
 
-class ResetCommand extends Command implements SelfHandling {
+class ResetCommand implements SelfHandling {
 
 	/**
 	 * @author	Andrea Marco Sartori

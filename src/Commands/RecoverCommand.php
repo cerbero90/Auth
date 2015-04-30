@@ -1,10 +1,9 @@
 <?php namespace Cerbero\Auth\Commands;
 
-use Cerbero\Auth\Commands\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Hashing\Hasher;
 
-class RecoverCommand extends Command implements SelfHandling {
+class RecoverCommand implements SelfHandling {
 
 	/**
 	 * @author	Andrea Marco Sartori

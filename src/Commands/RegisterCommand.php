@@ -1,10 +1,9 @@
 <?php namespace Cerbero\Auth\Commands;
 
-use Cerbero\Auth\Commands\Command;
 use Cerbero\Auth\Repositories\Users\UserRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 
-class RegisterCommand extends Command implements SelfHandling {
+class RegisterCommand implements SelfHandling {
 
 	/**
 	 * @author	Andrea Marco Sartori
