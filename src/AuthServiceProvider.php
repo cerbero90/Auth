@@ -34,8 +34,6 @@ class AuthServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		(new WorkflowServiceProvider($this->app))->register();
-
 		$userRepo = 'Cerbero\Auth\Repositories\EloquentUserRepository';
 
 		$this->app->bind('Cerbero\Auth\Repositories\UserRepositoryInterface', $userRepo);
