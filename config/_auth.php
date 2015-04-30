@@ -2,15 +2,6 @@
 
 return array(
 
-	'users' => [
-
-		# table name for the users
-		'table' => 'users',
-
-		# model used for the users
-		'model' => '\App\User',
-	],
-
 	# prefix for your authentication routes e.g. auth/login
 	'routes_prefix' => 'auth',
 

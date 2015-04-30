@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration {
 	 */
 	public function __construct()
 	{
-		$this->table = config('_auth.users.table');
+		$this->table = config('auth.table');
 	}
 
 	/**
