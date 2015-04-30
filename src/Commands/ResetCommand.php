@@ -1,13 +1,11 @@
 <?php namespace Cerbero\Auth\Commands;
 
-use Cerbero\Auth\Commands\Command;
 use Cerbero\Auth\Exceptions\DisplayException;
 use Cerbero\Auth\Repositories\Users\UserRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Hashing\Hasher;
-use Illuminate\Routing\Router;
 
-class ResetCommand extends Command implements SelfHandling {
+class ResetCommand implements SelfHandling {
 
 	/**
 	 * @author	Andrea Marco Sartori
@@ -16,13 +14,21 @@ class ResetCommand extends Command implements SelfHandling {
 	public $password;
 
 	/**
+	 * @author	Andrea Marco Sartori
+	 * @var		string	$token	Reset token.
+	 */
+	public $token;
+
+	/**
 	 * Create a new command instance.
 	 *
 	 * @return void
 	 */
-	public function __construct($password)
+	public function __construct($password, $token)
 	{
 		$this->password = $password;
+
+		$this->token = $token;
 	}
 
 	/**
@@ -30,11 +36,9 @@ class ResetCommand extends Command implements SelfHandling {
 	 *
 	 * @return void
 	 */
-	public function handle(Router $route, UserRepositoryInterface $users, Hasher $hasher)
+	public function handle(UserRepositoryInterface $users, Hasher $hasher)
 	{
-		$token = $route->input('token');
-
-		if( ! $user = $users->findByResetToken($token))
+		if( ! $user = $users->findByResetToken($this->token))
 		{
 			throw new DisplayException('auth::reset.error');
 		}
