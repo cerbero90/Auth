@@ -9,9 +9,11 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/cerbero90/auth.svg?style=flat-square)](https://scrutinizer-ci.com/g/cerbero90/auth)
 [![Gratipay](https://img.shields.io/gratipay/cerbero.svg?style=flat-square)](https://gratipay.com/cerbero/)
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/56fd0fb9-29d9-423a-9cc9-60f00a1b3367/big.png)](https://insight.sensiolabs.com/projects/56fd0fb9-29d9-423a-9cc9-60f00a1b3367)
+
 Auth is a Laravel module to quickly implement the authentication system into your applications, so that you don't have to implement it every time you start a new projects.
 
-By default Laravel has its own command to create the scaffolding for a new app, but I don't like it so much. Auth uses the [Workflow](https://github.com/cerbero90/Workflow) package to implement the authentication system.
+By default Laravel has its own command to create the scaffolding of a new app, but I don't like it so much. That's why I wrote my own authentication system to import it in all my projects and in yours as well if you like it :)
 
 ## Install
 
@@ -21,6 +23,11 @@ Run this command in your application root:
 composer require cerbero/auth
 ```
 
-## Usage
+Add the service provider to the `providers` list in **config/app.php** and then run these two commands in your terminal:
 
-@TODO
+```
+php artisan vendor:publish --provider="Cerbero\Auth\AuthServiceProvider”
+php artisan migrate
+```
+
+Now you have the database migrated with the **users** table and can customize the behavior of the authentication system by editing the file **config/_auth.php**.
