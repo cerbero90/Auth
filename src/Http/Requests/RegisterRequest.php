@@ -1,8 +1,8 @@
 <?php namespace Cerbero\Auth\Http\Requests;
 
-use Cerbero\Auth\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends Request {
+class RegisterRequest extends FormRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.
