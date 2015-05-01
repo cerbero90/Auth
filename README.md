@@ -30,7 +30,7 @@ php artisan vendor:publish --provider="Cerbero\Auth\AuthServiceProvider”
 php artisan migrate
 ```
 
-Now you have the database migrated with the **users** table and can customize the behavior of the authentication system by editing the file **config/_auth.php** as well as edit/translate the messages in **resources/lang/packages**.
+Now you have the database migrated with the **users** table and can customize the behavior of the authentication system by editing the file **config/_auth.php** as well as modify/translate the messages in **resources/lang/packages**.
 
 Finally, in order to display custom messages to the users, add the `DisplaysExceptions` trait to your exceptions handler:
 ```
