@@ -30,4 +30,29 @@ php artisan vendor:publish --provider="Cerbero\Auth\AuthServiceProvider”
 php artisan migrate
 ```
 
-Now you have the database migrated with the **users** table and can customize the behavior of the authentication system by editing the file **config/_auth.php**.
+Now you have the database migrated with the **users** table and can customize the behavior of the authentication system by editing the file **config/_auth.php** as well as edit/translate the messages in **resources/lang/packages**.
+
+Finally, in order to display custom errors to the users, add the `DisplaysExceptions` trait to your exceptions handler:
+```
+use Cerbero\Auth\Exceptions\DisplaysExceptions;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+
+class Handler extends ExceptionHandler {
+
+	use DisplaysExceptions;
+
+	public function render($request, Exception $e)
+	{
+		$this->displayExceptions($e);
+
+		return parent::render($request, $e);
+	}
+
+}
+```
+So now you can display the custom errors in your views:
+```
+@if ($error = session('error'))
+	<div class="alert alert-danger">{{ $error }}</div>
+@endif
+```
