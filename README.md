@@ -43,7 +43,7 @@ class Handler extends ExceptionHandler {
 
 	public function render($request, Exception $e)
 	{
-		$this->displayExceptions($e);
+		if($printable = $this->displayExceptions($e)) return $printable;
 
 		return parent::render($request, $e);
 	}
