@@ -10,6 +10,9 @@ return array(
 		# route where the user logs in
 		'route' => 'login',
 
+		# the name of the route where the user is redirected after logging in
+		'redirect' => 'dashboard',
+
 		# the view used to display the login page
 		'view' => 'auth.login',
 
@@ -31,6 +34,9 @@ return array(
 		# route where the user registers his account
 		'route' => 'register',
 
+		# the name of the route where the user is redirected after logging in
+		'redirect' => 'login.index',
+
 		# the view used to display the registration page
 		'view' => 'auth.register',
 
@@ -44,7 +50,7 @@ return array(
 		'fields' => ['email', 'password'],
 
 		# do you want to log in the user after his registration?
-		'login_after_registering' => true,
+		'login_after_registering' => false,
 
 		'email' => [
 
@@ -95,6 +101,9 @@ return array(
 
 		# route where the user logs out
 		'route' => 'logout',
+
+		# the name of the route where the user is redirected after logging in
+		'redirect' => 'home',
 	],
 
 );

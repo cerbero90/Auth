@@ -51,7 +51,7 @@ class AuthController extends Controller {
 	{
 		$this->bus->dispatchFrom('Cerbero\Auth\Commands\LoginCommand', $request);
 
-		return redirect('/');
+		return redirect()->route(config('_auth.login.redirect'));
 	}
 
 	/**
@@ -64,7 +64,7 @@ class AuthController extends Controller {
 	{
 		$this->bus->dispatchNow(new LogoutCommand);
 
-		return redirect('/');
+		return redirect()->route(config('_auth.logout.redirect'));
 	}
 
 	/**
@@ -95,7 +95,7 @@ class AuthController extends Controller {
 
 		])->dispatchFrom('Cerbero\Auth\Commands\RegisterCommand', $request);
 
-		return redirect('/')->withSuccess(trans('auth::register.success'));
+		return redirect()->route(config('_auth.register.redirect'))->withSuccess(trans('auth::register.success'));
 	}
 
 	/**
