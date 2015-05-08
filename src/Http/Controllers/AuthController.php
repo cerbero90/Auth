@@ -151,7 +151,7 @@ class AuthController extends Controller {
 	{
 		$this->bus->dispatchFrom('Cerbero\Auth\Commands\ResetCommand', $request, compact('token'));
 
-		return redirect()->route('login.index')->withSuccess(trans('reset.success'));
+		return redirect()->route('login.index')->withSuccess(trans('auth::reset.success'));
 	}
 
 }
