@@ -1,7 +1,7 @@
 <?php namespace Cerbero\Auth\Commands;
 
 use Cerbero\Auth\Exceptions\DisplayException;
-use Cerbero\Auth\Repositories\Users\UserRepositoryInterface;
+use Cerbero\Auth\Repositories\UserRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Hashing\Hasher;
 
