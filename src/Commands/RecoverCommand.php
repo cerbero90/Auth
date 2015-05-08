@@ -1,7 +1,6 @@
 <?php namespace Cerbero\Auth\Commands;
 
 use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Contracts\Hashing\Hasher;
 
 class RecoverCommand implements SelfHandling {
 
@@ -26,11 +25,9 @@ class RecoverCommand implements SelfHandling {
 	 *
 	 * @return void
 	 */
-	public function handle(Hasher $hasher)
+	public function handle()
 	{
-		$hash = $hasher->make($this->email . microtime());
-
-		return substr($hash, 50);
+		return str_random(10);
 	}
 
 }
