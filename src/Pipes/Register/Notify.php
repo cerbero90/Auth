@@ -43,7 +43,9 @@ class Notify extends AbstractPipe {
 
 			$payload = ['user' => $handled, 'password' => $this->password];
 
-			$mailer->send(config('_auth.register.email.view'), $payload, function($message) use($email)
+			$method = config('_auth.register.email.queue') ? 'queue' : 'send';
+
+			$mailer->$method(config('_auth.register.email.view'), $payload, function($message) use($email)
 			{
 				$message->to($email)->subject(trans('auth::register.email_subject'));
 			});
