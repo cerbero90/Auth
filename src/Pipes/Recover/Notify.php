@@ -28,7 +28,9 @@ class Notify extends AbstractPipe {
 	{
 		$email = $command->email;
 
-		$mailer->send(config('_auth.recover.email_view'), ['token' => $handled], function($message) use($email)
+		$method = config('_auth.recover.email.queue') ? 'queue' : 'send';
+
+		$mailer->$method(config('_auth.recover.email.view'), ['token' => $handled], function($message) use($email)
 		{
 			$message->to($email)->subject(trans('auth::recover.email_subject'));
 		});

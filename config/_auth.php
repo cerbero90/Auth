@@ -57,6 +57,9 @@ return array(
 			# do you want to send a welcome email?
 			'send' => true,
 
+			# do you want to enqueue email sending?
+			'queue' => false,
+
 			# the view used to display the welcome email
 			'view' => 'emails.register',
 
@@ -79,8 +82,14 @@ return array(
 			'email' => 'required|email|exists:users,email'
 		],
 
-		# the view used to display the recovery email
-		'email_view' => 'emails.recover',
+		'email' => [
+
+			# the view used to display the recovery email
+			'view' => 'emails.recover',
+
+			# do you want to enqueue email sending?
+			'queue' => false,
+		],
 	],
 
 	'reset' => [
