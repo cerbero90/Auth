@@ -5,6 +5,17 @@ return array(
 	# prefix for your authentication routes e.g. auth/login
 	'routes_prefix' => 'auth',
 
+	# prevent spam and forms being submitted by bots
+	'honeypot' => [
+
+		# do you want to turn honeypot on?
+		'enabled' => true,
+
+		# the name of the fake field to put in your views
+		# remember to hide this field with CSS
+		'field' => 'mobile',
+	],
+
 	'login' => [
 
 		# route where the user logs in
