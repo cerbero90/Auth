@@ -15,6 +15,18 @@ Auth is a Laravel module to quickly implement the authentication system into you
 
 By default Laravel has its own command to create an authentication scaffolding, but I don't find it very flexible. That's why I wrote my own authentication system to import it in all my projects and in yours as well if you like it :)
 
+## Features
+
+List of features included in this package:
+
++ Login
++ Registration
++ Password reset
++ Logout
++ High customization
++ CSRF protection 
++ Honeypot trap
+
 ## Install
 
 Run this command in your application root:
