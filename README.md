@@ -23,7 +23,19 @@ Run this command in your application root:
 composer require cerbero/auth
 ```
 
-Add the service provider to the `providers` list in **config/app.php** and then run these two commands in your terminal:
+Add the service provider to the `providers` list in **config/app.php**:
+
+```php
+Cerbero\Auth\AuthServiceProvider::class,
+```
+
+Add the following route middleware in **app/Http/Kernel.php**:
+
+```php
+'honeypot' => \Cerbero\Auth\Http\Middleware\Honeypot::class,
+```
+
+And then run these two commands in your terminal:
 
 ```
 php artisan vendor:publish --provider="Cerbero\Auth\AuthServiceProvider”
