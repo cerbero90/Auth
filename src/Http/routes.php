@@ -5,7 +5,7 @@ Route::when('*', 'csrf', ['POST', 'PUT', 'PATCH', 'DELETE']);
 
 Route::group(['prefix' => config('_auth.routes_prefix')], function()
 {
-	Route::group(['middleware' => 'guest'], function()
+	Route::group(['middleware' => ['guest', 'honeypot']], function()
 	{
 		Route::get(config('_auth.login.route'), ['as' => 'login.index', 'uses' => 'Cerbero\Auth\Http\Controllers\AuthController@showLogin']);
 		Route::post(config('_auth.login.route'), ['as' => 'login.store', 'uses' => 'Cerbero\Auth\Http\Controllers\AuthController@login']);
