@@ -23,7 +23,7 @@ List of features included in this package:
 + Registration
 + Password reset
 + Logout
-+ High customization
++ [High customization](https://github.com/cerbero90/Auth/blob/master/config/_auth.php)
 + CSRF protection 
 + Honeypot trap
 + Login throttling
