@@ -38,6 +38,19 @@ return array(
 
 		# the name of the "Remember me" checkbox, set null if not present
 		'remember_me' => 'remember',
+
+		# prevent too many wrong login attempts
+		'throttling' => [
+
+			# do you want to turn throttling on?
+			'enabled' => true,
+
+			# the number of allowed login attempts
+			'max_attempts' => 5,
+
+			# the number of seconds to wait before the next attempt
+			'delay' => 60,
+		],
 	],
 
 	'register' => [
