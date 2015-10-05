@@ -34,9 +34,35 @@ class AuthServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+		$this->registerUserRepository();
+
+		$this->registerThrottler();
+	}
+
+	/**
+	 * Register the user repository.
+	 *
+	 * @author	Andrea Marco Sartori
+	 * @return	void
+	 */
+	private function registerUserRepository()
+	{
 		$userRepo = 'Cerbero\Auth\Repositories\EloquentUserRepository';
 
 		$this->app->bind('Cerbero\Auth\Repositories\UserRepositoryInterface', $userRepo);
+	}
+
+	/**
+	 * Register the login throttling service.
+	 *
+	 * @author	Andrea Marco Sartori
+	 * @return	void
+	 */
+	private function registerThrottler()
+	{
+		$throttler = 'Cerbero\Auth\Services\Throttling\CachingThrottler';
+
+		$this->app->bind('Cerbero\Auth\Services\Throttling\ThrottlerInterface', $throttler);
 	}
 
 }

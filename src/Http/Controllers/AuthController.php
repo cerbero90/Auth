@@ -49,7 +49,10 @@ class AuthController extends Controller {
 	 */
 	public function login(LoginRequest $request)
 	{
-		$this->bus->dispatchFrom('Cerbero\Auth\Commands\LoginCommand', $request);
+		$this->bus->pipeThrough([
+			'Cerbero\Auth\Pipes\Login\Throttle',
+
+		])->dispatchFrom('Cerbero\Auth\Commands\LoginCommand', $request);
 
 		return redirect()->route(config('_auth.login.redirect'));
 	}

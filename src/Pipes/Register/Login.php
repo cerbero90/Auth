@@ -6,17 +6,6 @@ use Illuminate\Contracts\Auth\Guard;
 class Login extends AbstractPipe {
 
 	/**
-	 * Run before the command is handled.
-	 *
-	 * @param	Cerbero\Auth\Commands\Command	$command
-	 * @return	mixed
-	 */
-	public function before($command)
-	{
-		//
-	}
-
-	/**
 	 * Run after the handled command.
 	 *
 	 * @param	Illuminate\Contracts\Auth\Guard	$auth
@@ -26,10 +15,18 @@ class Login extends AbstractPipe {
 	 */
 	public function after(Guard $auth, $handled, $command)
 	{
-		if(config('_auth.register.login_after_registering'))
-		{
-			$auth->login($handled);
-		}
+		$auth->login($handled);
+	}
+
+	/**
+	 * Determine whether the after method has to be processed.
+	 *
+	 * @author	Andrea Marco Sartori
+	 * @return	boolean
+	 */
+	protected function afterIsEnabled()
+	{
+		return config('_auth.register.login_after_registering');
 	}
 
 }

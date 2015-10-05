@@ -12,11 +12,12 @@ class DisplayException extends \Exception {
 	 *
 	 * @author	Andrea Marco Sartori
 	 * @param	string	$message
+	 * @param	array	$parameters
 	 * @return	void
 	 */
-	public function __construct($message)
+	public function __construct($message, array $parameters = [])
 	{
-		$translation = trans($message);
+		$translation = trans($message, $parameters);
 
 		parent::__construct($translation);
 	}
