@@ -19,12 +19,20 @@ class Notify extends AbstractPipe {
 	 */
 	public function before($command)
 	{
-		if(config('_auth.register.email.generate_password_for_user'))
-		{
-			$this->password = str_random(8);
+		$this->password = str_random(8);
 
-			$command->attributes['password'] = $this->password;
-		}
+		$command->attributes['password'] = $this->password;
+	}
+
+	/**
+	 * Determine whether the before method has to be processed.
+	 *
+	 * @author	Andrea Marco Sartori
+	 * @return	boolean
+	 */
+	protected function beforeIsEnabled()
+	{
+		return config('_auth.register.email.generate_password_for_user');
 	}
 
 	/**
@@ -37,19 +45,27 @@ class Notify extends AbstractPipe {
 	 */
 	public function after(Mailer $mailer, $handled, $command)
 	{
-		if(config('_auth.register.email.send'))
+		$email = $handled->email;
+
+		$payload = ['user' => $handled, 'password' => $this->password];
+
+		$method = config('_auth.register.email.queue') ? 'queue' : 'send';
+
+		$mailer->$method(config('_auth.register.email.view'), $payload, function($message) use($email)
 		{
-			$email = $handled->email;
+			$message->to($email)->subject(trans('auth::register.email_subject'));
+		});
+	}
 
-			$payload = ['user' => $handled, 'password' => $this->password];
-
-			$method = config('_auth.register.email.queue') ? 'queue' : 'send';
-
-			$mailer->$method(config('_auth.register.email.view'), $payload, function($message) use($email)
-			{
-				$message->to($email)->subject(trans('auth::register.email_subject'));
-			});
-		}
+	/**
+	 * Determine whether the after method has to be processed.
+	 *
+	 * @author	Andrea Marco Sartori
+	 * @return	boolean
+	 */
+	protected function afterIsEnabled()
+	{
+		return config('_auth.register.email.send');
 	}
 
 }

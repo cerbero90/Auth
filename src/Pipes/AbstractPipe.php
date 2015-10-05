@@ -56,23 +56,36 @@ abstract class AbstractPipe {
 	 */
 	protected function callBefore($command)
 	{
-		$this->callIfExists('before', [$command]);
+		$this->callIfExistsAndEnabled('before', [$command]);
 	}
 
 	/**
-	 * Call a method if it exists and resolve its dependencies.
+	 * Call and resolve depepndencies of a method if enabled.
 	 *
 	 * @author	Andrea Marco Sartori
 	 * @param	string	$method
 	 * @param	array	$parameters
 	 * @return	void
 	 */
-	private function callIfExists($method, array $parameters = [])
+	private function callIfExistsAndEnabled($method, array $parameters = [])
 	{
-		if(method_exists($this, $method))
+		if( ! $this->isEnabled()) return;
+
+		if(method_exists($this, $method) && $this->{"{$method}IsEnabled"}())
 		{
 			$this->container->call([$this, $method], $parameters);
 		}
+	}
+
+	/**
+	 * Determine whether the whole pipe has to be processed.
+	 *
+	 * @author	Andrea Marco Sartori
+	 * @return	boolean
+	 */
+	protected function isEnabled()
+	{
+		return true;
 	}
 
 	/**
@@ -85,7 +98,29 @@ abstract class AbstractPipe {
 	 */
 	protected function callAfter($handled, $command)
 	{
-		$this->callIfExists('after', [$handled, $command]);
+		$this->callIfExistsAndEnabled('after', [$handled, $command]);
+	}
+
+	/**
+	 * Determine whether the before method has to be processed.
+	 *
+	 * @author	Andrea Marco Sartori
+	 * @return	boolean
+	 */
+	protected function beforeIsEnabled()
+	{
+		return true;
+	}
+
+	/**
+	 * Determine whether the after method has to be processed.
+	 *
+	 * @author	Andrea Marco Sartori
+	 * @return	boolean
+	 */
+	protected function afterIsEnabled()
+	{
+		return true;
 	}
 
 }
