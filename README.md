@@ -26,6 +26,7 @@ List of features included in this package:
 + High customization
 + CSRF protection 
 + Honeypot trap
++ Login throttling
 
 ## Install
 
