@@ -11,7 +11,7 @@
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/56fd0fb9-29d9-423a-9cc9-60f00a1b3367/big.png)](https://insight.sensiolabs.com/projects/56fd0fb9-29d9-423a-9cc9-60f00a1b3367)
 
-Auth is a Laravel package to quickly implement the authentication system into your applications, allowing you to implement it every time you start a new project and letting you customize every single aspect of the process.
+Auth is a Laravel package to quickly implement the authentication system into your applications, avoiding you to reinvent the wheel every time you start a new project and letting you customize every single aspect of the process.
 
 This package is intended to be a more customizable alternative to the authentication system shipped by Laravel out of the box and also includes some security features like honeypot and login throttling.
 
