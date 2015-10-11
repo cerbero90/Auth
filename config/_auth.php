@@ -5,6 +5,9 @@ return array(
 	# prefix for your authentication routes e.g. auth/login
 	'routes_prefix' => 'auth',
 
+	# the auth controller, you may use your own by extending the default one
+	'controller' => 'Cerbero\Auth\Http\Controllers\AuthController',
+
 	# prevent spam and forms being submitted by bots
 	'honeypot' => [
 
