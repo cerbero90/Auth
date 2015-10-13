@@ -6,14 +6,14 @@ use Illuminate\Contracts\Auth\Guard;
 class Login extends AbstractPipe {
 
 	/**
-	 * Run after the handled command.
+	 * Run after the handled job.
 	 *
 	 * @param	Illuminate\Contracts\Auth\Guard	$auth
 	 * @param	mixed	$handled
-	 * @param	Cerbero\Auth\Commands\Command	$command
+	 * @param	Cerbero\Auth\Jobs\LoginJob	$job
 	 * @return	mixed
 	 */
-	public function after(Guard $auth, $handled, $command)
+	public function after(Guard $auth, $handled, $job)
 	{
 		$auth->login($handled);
 	}

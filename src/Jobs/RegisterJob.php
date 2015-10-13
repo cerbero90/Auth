@@ -1,9 +1,9 @@
-<?php namespace Cerbero\Auth\Commands;
+<?php namespace Cerbero\Auth\Jobs;
 
 use Cerbero\Auth\Repositories\UserRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 
-class RegisterCommand implements SelfHandling {
+class RegisterJob implements SelfHandling {
 
 	/**
 	 * @author	Andrea Marco Sartori
@@ -12,7 +12,7 @@ class RegisterCommand implements SelfHandling {
 	public $attributes;
 
 	/**
-	 * Create a new command instance.
+	 * Create a new job instance.
 	 *
 	 * @return void
 	 */
@@ -24,7 +24,7 @@ class RegisterCommand implements SelfHandling {
 	}
 
 	/**
-	 * Execute the command.
+	 * Execute the job.
 	 *
 	 * @return void
 	 */

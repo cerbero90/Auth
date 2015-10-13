@@ -17,16 +17,16 @@ class Notify extends AbstractPipe {
 	}
 
 	/**
-	 * Run after the handled command.
+	 * Run after the handled job.
 	 *
 	 * @param	Illuminate\Contracts\Mail\Mailer	$mailer
 	 * @param	mixed	$handled
-	 * @param	Cerbero\Auth\Commands\Command	$command
+	 * @param	Cerbero\Auth\Jobs\RecoverJob	$job
 	 * @return	mixed
 	 */
-	public function after(Mailer $mailer, $handled, $command)
+	public function after(Mailer $mailer, $handled, $job)
 	{
-		$email = $command->email;
+		$email = $job->email;
 
 		$method = config('_auth.recover.email.queue') ? 'queue' : 'send';
 

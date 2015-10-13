@@ -12,16 +12,16 @@ class Notify extends AbstractPipe {
 	protected $password = null;
 
 	/**
-	 * Run before the command is handled.
+	 * Run before the job is handled.
 	 *
-	 * @param	Cerbero\Auth\Commands\Command	$command
+	 * @param	Cerbero\Auth\Jobs\RegisterJob	$job
 	 * @return	mixed
 	 */
-	public function before($command)
+	public function before($job)
 	{
 		$this->password = str_random(8);
 
-		$command->attributes['password'] = $this->password;
+		$job->attributes['password'] = $this->password;
 	}
 
 	/**
@@ -36,14 +36,14 @@ class Notify extends AbstractPipe {
 	}
 
 	/**
-	 * Run after the handled command.
+	 * Run after the handled job.
 	 *
 	 * @param	Illuminate\Contracts\Mail\Mailer	$mailer
 	 * @param	mixed	$handled
-	 * @param	Cerbero\Auth\Commands\Command	$command
+	 * @param	Cerbero\Auth\Jobs\RegisterJob	$job
 	 * @return	mixed
 	 */
-	public function after(Mailer $mailer, $handled, $command)
+	public function after(Mailer $mailer, $handled, $job)
 	{
 		$email = $handled->email;
 

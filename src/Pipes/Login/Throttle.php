@@ -7,15 +7,15 @@ use Cerbero\Auth\Services\Throttling\ThrottlerInterface;
 class Throttle extends AbstractPipe {
 
 	/**
-	 * Run before the command is handled.
+	 * Run before the job is handled.
 	 *
 	 * @param	Cerbero\Auth\Services\Throttling\ThrottlerInterface	$throttler
-	 * @param	Cerbero\Auth\Commands\Command	$command
+	 * @param	Cerbero\Auth\Jobs\LoginJob	$job
 	 * @return	mixed
 	 */
-	public function before(ThrottlerInterface $throttler, $command)
+	public function before(ThrottlerInterface $throttler, $job)
 	{
-		$throttler->setSource($this->getSourceByCommand($command));
+		$throttler->setSource($this->getSourceByJob($job));
 
 		$throttler->incrementAttempts();
 
@@ -30,28 +30,28 @@ class Throttle extends AbstractPipe {
 	}
 
 	/**
-	 * Create source by using the given command.
+	 * Create source by using the given job.
 	 *
 	 * @author	Andrea Marco Sartori
-	 * @param	type	$command
+	 * @param	type	$job
 	 * @return	string
 	 */
-	private function getSourceByCommand($command)
+	private function getSourceByJob($job)
 	{
-		$login = head(array_except($command->credentials, 'password'));
+		$login = head(array_except($job->credentials, 'password'));
 
 		return $login . app('request')->ip();
 	}
 
 	/**
-	 * Run after the handled command.
+	 * Run after the handled job.
 	 *
 	 * @param	Cerbero\Auth\Services\Throttling\ThrottlerInterface	$throttler
 	 * @param	mixed	$handled
-	 * @param	Cerbero\Auth\Commands\Command	$command
+	 * @param	Cerbero\Auth\Jobs\LoginJob	$job
 	 * @return	mixed
 	 */
-	public function after(ThrottlerInterface $throttler, $handled, $command)
+	public function after(ThrottlerInterface $throttler, $handled, $job)
 	{
 		$throttler->resetAttempts();
 	}
