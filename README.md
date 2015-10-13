@@ -11,9 +11,23 @@
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/56fd0fb9-29d9-423a-9cc9-60f00a1b3367/big.png)](https://insight.sensiolabs.com/projects/56fd0fb9-29d9-423a-9cc9-60f00a1b3367)
 
-Auth is a Laravel module to quickly implement the authentication system into your applications, so that you don't have to implement it every time you start a new projects.
+Auth is a Laravel package to quickly implement the authentication system into your applications, avoiding you to reinvent the wheel every time you start a new project and letting you customize every single aspect of the process.
 
-By default Laravel has its own command to create the scaffolding of a new app, but I don't like it so much. That's why I wrote my own authentication system to import it in all my projects and in yours as well if you like it :)
+This package is intended to be a more customizable alternative to the authentication system shipped by Laravel out of the box and also includes some security features like honeypot and login throttling.
+
+
+## Features
+
+List of features included in this package:
+
++ Login
++ Registration
++ Password reset
++ Logout
++ [High customization](https://github.com/cerbero90/Auth/blob/master/config/_auth.php)
++ CSRF protection 
++ Honeypot trap
++ Login throttling
 
 ## Install
 
@@ -23,7 +37,19 @@ Run this command in your application root:
 composer require cerbero/auth
 ```
 
-Add the service provider to the `providers` list in **config/app.php** and then run these two commands in your terminal:
+Add the service provider to the `providers` list in **config/app.php**:
+
+```php
+Cerbero\Auth\AuthServiceProvider::class,
+```
+
+Add the following route middleware in **app/Http/Kernel.php**:
+
+```php
+'honeypot' => \Cerbero\Auth\Http\Middleware\Honeypot::class,
+```
+
+And then run these two commands in your terminal:
 
 ```
 php artisan vendor:publish --provider="Cerbero\Auth\AuthServiceProvider”
