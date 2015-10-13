@@ -20,16 +20,4 @@ class Hash extends AbstractPipe {
 		}
 	}
 
-	/**
-	 * Run after the handled command.
-	 *
-	 * @param	mixed	$handled
-	 * @param	Cerbero\Auth\Commands\Command	$command
-	 * @return	mixed
-	 */
-	public function after($handled, $command)
-	{
-		//
-	}
-
 }
