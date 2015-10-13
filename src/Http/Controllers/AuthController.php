@@ -1,6 +1,6 @@
 <?php namespace Cerbero\Auth\Http\Controllers;
 
-use Cerbero\Auth\Commands\LogoutCommand;
+use Cerbero\Auth\Jobs\LogoutJob;
 use Cerbero\Auth\Http\Requests\LoginRequest;
 use Cerbero\Auth\Http\Requests\RecoverRequest;
 use Cerbero\Auth\Http\Requests\RegisterRequest;
@@ -12,7 +12,7 @@ class AuthController extends Controller {
 
 	/**
 	 * @author	Andrea Marco Sartori
-	 * @var		Illuminate\Contracts\Bus\Dispatcher	$bus	Command bus dispatcher.
+	 * @var		Illuminate\Contracts\Bus\Dispatcher	$bus	Bus dispatcher.
 	 */
 	protected $bus;
 	
@@ -52,7 +52,7 @@ class AuthController extends Controller {
 		$this->bus->pipeThrough([
 			'Cerbero\Auth\Pipes\Login\Throttle',
 
-		])->dispatchFrom('Cerbero\Auth\Commands\LoginCommand', $request);
+		])->dispatchFrom('Cerbero\Auth\Jobs\LoginJob', $request);
 
 		return redirect()->route(config('_auth.login.redirect'));
 	}
@@ -65,7 +65,7 @@ class AuthController extends Controller {
 	 */
 	public function logout()
 	{
-		$this->bus->dispatchNow(new LogoutCommand);
+		$this->bus->dispatchNow(new LogoutJob);
 
 		return redirect()->route(config('_auth.logout.redirect'));
 	}
@@ -96,7 +96,7 @@ class AuthController extends Controller {
 			'Cerbero\Auth\Pipes\Register\Notify',
 			'Cerbero\Auth\Pipes\Register\Hash',
 
-		])->dispatchFrom('Cerbero\Auth\Commands\RegisterCommand', $request);
+		])->dispatchFrom('Cerbero\Auth\Jobs\RegisterJob', $request);
 
 		return redirect()->route(config('_auth.register.redirect'))->withSuccess(trans('auth::register.success'));
 	}
@@ -126,7 +126,7 @@ class AuthController extends Controller {
 			'Cerbero\Auth\Pipes\Recover\Notify',
 			'Cerbero\Auth\Pipes\Recover\Store',
 
-		])->dispatchFrom('Cerbero\Auth\Commands\RecoverCommand', $request);
+		])->dispatchFrom('Cerbero\Auth\Jobs\RecoverJob', $request);
 
 		return back()->withSuccess(trans('auth::recover.success'));
 	}
@@ -152,7 +152,7 @@ class AuthController extends Controller {
 	 */
 	public function reset(ResetRequest $request, $token)
 	{
-		$this->bus->dispatchFrom('Cerbero\Auth\Commands\ResetCommand', $request, compact('token'));
+		$this->bus->dispatchFrom('Cerbero\Auth\Jobs\ResetJob', $request, compact('token'));
 
 		return redirect()->route('login.index')->withSuccess(trans('auth::reset.success'));
 	}
