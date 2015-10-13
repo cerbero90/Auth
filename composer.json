@@ -2,7 +2,7 @@
     "name": "cerbero/auth",
     "description": "Laravel module to implement the authentication system into your applications.",
     "keywords": [
-        "laravel", "auth", "authentication", "login", "logout", "registration", "password reset"
+        "laravel", "auth", "authentication", "login", "registration", "honeypot", "throttling"
     ],
     "homepage": "https://github.com/cerbero90/auth",
     "license": "MIT",
