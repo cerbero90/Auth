@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
 	# prefix for your authentication routes e.g. auth/login
 	'routes_prefix' => 'auth',
@@ -142,4 +142,4 @@ return array(
 		'redirect' => 'home',
 	],
 
-);
+];
