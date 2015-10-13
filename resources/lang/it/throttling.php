@@ -2,6 +2,6 @@
 
 return [
 
-	'error' => 'Troppi tentativi di login. Potrai provare nuovamente tra :seconds secondi.',
+	'error' => 'Troppi tentativi di login. Per favore riprova tra :seconds secondi.',
 
 ];

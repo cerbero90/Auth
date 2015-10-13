@@ -2,6 +2,6 @@
 
 return [
 
-	'error' => 'Non è stato possibile eseguire il login. Per favore controlla le tue credenziali..',
+	'error' => 'Impossibile effettuare il login al tuo account. Per favore controlla le tue credenziali.',
 
 ];

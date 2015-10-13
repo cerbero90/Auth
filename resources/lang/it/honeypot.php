@@ -2,6 +2,6 @@
 
 return [
 
-	'error' => 'E\' stata rilevata una attività sospetta.',
+	'error' => "È stata rilevata un'attività sospetta.",
 
 ];

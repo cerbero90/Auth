@@ -2,8 +2,8 @@
 
 return [
 
-	'success' => 'Ti è stata inviata una email per il reset della tua password, controlla la tua casella email.',
+	'success' => 'Ti è stata inviata una email per resettare la password, per favore controlla la tua posta.',
 
-	'email_subject' => 'Reset password',
+	'email_subject' => 'Reset della password',
 
 ];

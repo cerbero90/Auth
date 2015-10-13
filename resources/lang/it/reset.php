@@ -2,8 +2,8 @@
 
 return [
 
-	'error' => 'Non è stato possibile fare il reset della password, il token non è valido.',
+	'error' => 'Impossibile resettare la password, il codice di reset non è valido.',
 
-	'success' => 'La password è stata resetatta con successo! Adesso puoi fare il login.',
+	'success' => 'La password è stata resettata con successo! Ora puoi effettuare il login.',
 
 ];
