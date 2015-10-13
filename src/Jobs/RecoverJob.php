@@ -1,8 +1,8 @@
-<?php namespace Cerbero\Auth\Commands;
+<?php namespace Cerbero\Auth\Jobs;
 
 use Illuminate\Contracts\Bus\SelfHandling;
 
-class RecoverCommand implements SelfHandling {
+class RecoverJob implements SelfHandling {
 
 	/**
 	 * @author	Andrea Marco Sartori
@@ -11,7 +11,7 @@ class RecoverCommand implements SelfHandling {
 	public $email;
 
 	/**
-	 * Create a new command instance.
+	 * Create a new job instance.
 	 *
 	 * @return void
 	 */
@@ -21,7 +21,7 @@ class RecoverCommand implements SelfHandling {
 	}
 
 	/**
-	 * Execute the command.
+	 * Execute the job.
 	 *
 	 * @return void
 	 */

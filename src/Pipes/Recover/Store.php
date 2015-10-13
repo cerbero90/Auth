@@ -16,17 +16,16 @@ class Store extends AbstractPipe {
 		//
 	}
 
-	/**
-	 * Run after the handled command.
+	 * Run after the handled job.
 	 *
 	 * @param	Cerbero\Auth\Repositories\UserRepositoryInterface	$user
 	 * @param	mixed	$handled
-	 * @param	Cerbero\Auth\Commands\Command	$command
+	 * @param	Cerbero\Auth\Jobs\RecoverJob	$job
 	 * @return	mixed
 	 */
-	public function after(UserRepositoryInterface $user, $handled, $command)
+	public function after(UserRepositoryInterface $user, $handled, $job)
 	{
-		$user->assignResetToken($handled, $command->email);
+		$user->assignResetToken($handled, $job->email);
 	}
 
 }

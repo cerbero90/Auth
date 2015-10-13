@@ -1,10 +1,10 @@
-<?php namespace Cerbero\Auth\Commands;
+<?php namespace Cerbero\Auth\Jobs;
 
 use Cerbero\Auth\Exceptions\DisplayException;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Bus\SelfHandling;
 
-class LoginCommand implements SelfHandling {
+class LoginJob implements SelfHandling {
 
 	/**
 	 * @author	Andrea Marco Sartori
@@ -19,7 +19,7 @@ class LoginCommand implements SelfHandling {
 	public $remember;
 
 	/**
-	 * Create a new command instance.
+	 * Create a new job instance.
 	 *
 	 * @return void
 	 */
@@ -31,7 +31,7 @@ class LoginCommand implements SelfHandling {
 	}
 
 	/**
-	 * Execute the command.
+	 * Execute the job.
 	 *
 	 * @return void
 	 */

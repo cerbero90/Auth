@@ -1,11 +1,11 @@
-<?php namespace Cerbero\Auth\Commands;
+<?php namespace Cerbero\Auth\Jobs;
 
 use Cerbero\Auth\Exceptions\DisplayException;
 use Cerbero\Auth\Repositories\UserRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Hashing\Hasher;
 
-class ResetCommand implements SelfHandling {
+class ResetJob implements SelfHandling {
 
 	/**
 	 * @author	Andrea Marco Sartori
@@ -20,7 +20,7 @@ class ResetCommand implements SelfHandling {
 	public $token;
 
 	/**
-	 * Create a new command instance.
+	 * Create a new job instance.
 	 *
 	 * @return void
 	 */
@@ -32,7 +32,7 @@ class ResetCommand implements SelfHandling {
 	}
 
 	/**
-	 * Execute the command.
+	 * Execute the job.
 	 *
 	 * @return void
 	 */
