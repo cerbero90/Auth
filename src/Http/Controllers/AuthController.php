@@ -83,12 +83,27 @@ class AuthController extends Controller {
 	 */
 	public function login(LoginRequest $request)
 	{
-		$this->bus->pipeThrough([
-			'Cerbero\Auth\Pipes\Login\Throttle',
-
-		])->dispatchFrom('Cerbero\Auth\Jobs\LoginJob', $request);
+		$this->bus->pipeThrough($this->pipesOf('login'))->dispatchFrom(LoginJob::class, $request);
 
 		return redirect()->route(config('_auth.login.redirect'));
+	}
+
+	/**
+	 * Retrieve the pipes of a given process.
+	 *
+	 * @author	Andrea Marco Sartori
+	 * @param	string	$process
+	 * @return	array
+	 */
+	protected function pipesOf($process)
+	{
+		$Process = ucfirst($process);
+
+		return array_map(function($pipe) use($Process)
+		{
+			return "Cerbero\Auth\Pipes\\{$Process}\\{$pipe}";
+
+		}, $this->{"{$process}Pipes"});
 	}
 
 	/**
@@ -99,7 +114,7 @@ class AuthController extends Controller {
 	 */
 	public function logout()
 	{
-		$this->bus->dispatchNow(new LogoutJob);
+		$this->bus->pipeThrough($this->pipesOf('logout'))->dispatchNow(new LogoutJob);
 
 		return redirect()->route(config('_auth.logout.redirect'));
 	}
@@ -125,12 +140,7 @@ class AuthController extends Controller {
 	 */
 	public function register(RegisterRequest $request)
 	{
-		$this->bus->pipeThrough([
-			'Cerbero\Auth\Pipes\Register\Login',
-			'Cerbero\Auth\Pipes\Register\Notify',
-			'Cerbero\Auth\Pipes\Register\Hash',
-
-		])->dispatchFrom('Cerbero\Auth\Jobs\RegisterJob', $request);
+		$this->bus->pipeThrough($this->pipesOf('register'))->dispatchFrom(RegisterJob::class, $request);
 
 		return redirect()->route(config('_auth.register.redirect'))->withSuccess(trans('auth::register.success'));
 	}
@@ -156,11 +166,7 @@ class AuthController extends Controller {
 	 */
 	public function recover(RecoverRequest $request)
 	{
-		$this->bus->pipeThrough([
-			'Cerbero\Auth\Pipes\Recover\Notify',
-			'Cerbero\Auth\Pipes\Recover\Store',
-
-		])->dispatchFrom('Cerbero\Auth\Jobs\RecoverJob', $request);
+		$this->bus->pipeThrough($this->pipesOf('recover'))->dispatchFrom(RecoverJob::class, $request);
 
 		return back()->withSuccess(trans('auth::recover.success'));
 	}
@@ -186,7 +192,7 @@ class AuthController extends Controller {
 	 */
 	public function reset(ResetRequest $request, $token)
 	{
-		$this->bus->dispatchFrom('Cerbero\Auth\Jobs\ResetJob', $request, compact('token'));
+		$this->bus->pipeThrough($this->pipesOf('reset'))->dispatchFrom(ResetJob::class, $request, compact('token'));
 
 		return redirect()->route('login.index')->withSuccess(trans('auth::reset.success'));
 	}
