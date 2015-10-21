@@ -18,11 +18,11 @@ class AuthServiceProvider extends ServiceProvider {
 	{
 		$this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'auth');
 
-		$this->publishes([
-			__DIR__.'/../config/_auth.php' => config_path('_auth.php'),
-			__DIR__.'/../database/migrations/' => base_path('database/migrations'),
-			__DIR__.'/../resources/lang/en/' => base_path('resources/lang/packages/en/auth'),
-		]);
+		$this->publishes([__DIR__.'/../config/_auth.php' => config_path('_auth.php')], 'config');
+
+		$this->publishes([__DIR__.'/../database/migrations/' => database_path('migrations')], 'migration');
+
+		$this->publishes([__DIR__.'/../resources/lang/' => base_path('resources/lang/vendor/auth')], 'lang');
 
 		include __DIR__.'/Http/routes.php';
 	}
@@ -34,6 +34,8 @@ class AuthServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+		$this->mergeConfigFrom(__DIR__.'/../config/_auth.php', 'auth');
+
 		$this->registerUserRepository();
 
 		$this->registerThrottler();
