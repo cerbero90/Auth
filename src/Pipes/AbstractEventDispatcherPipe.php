@@ -2,7 +2,6 @@
 
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Events\Dispatcher;
-use \Closure;
 
 /**
  * Abstract implementation of a pipe that dispatches events.
