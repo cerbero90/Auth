@@ -34,6 +34,8 @@ class AuthServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+		$this->mergeConfigFrom(__DIR__.'/../config/_auth.php', 'auth');
+
 		$this->registerUserRepository();
 
 		$this->registerThrottler();
