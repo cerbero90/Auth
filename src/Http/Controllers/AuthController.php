@@ -1,6 +1,10 @@
 <?php namespace Cerbero\Auth\Http\Controllers;
 
+use Cerbero\Auth\Jobs\LoginJob;
 use Cerbero\Auth\Jobs\LogoutJob;
+use Cerbero\Auth\Jobs\RegisterJob;
+use Cerbero\Auth\Jobs\RecoverJob;
+use Cerbero\Auth\Jobs\ResetJob;
 use Cerbero\Auth\Http\Requests\LoginRequest;
 use Cerbero\Auth\Http\Requests\RecoverRequest;
 use Cerbero\Auth\Http\Requests\RegisterRequest;
