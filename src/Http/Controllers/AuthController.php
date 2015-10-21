@@ -19,6 +19,36 @@ class AuthController extends Controller {
 	 * @var		Illuminate\Contracts\Bus\Dispatcher	$bus	Bus dispatcher.
 	 */
 	protected $bus;
+
+	/**
+	 * @author	Andrea Marco Sartori
+	 * @var		array	$loginPipes	List of pipes for the login process.
+	 */
+	protected $loginPipes = ['DispatchEvent', 'Throttle'];
+
+	/**
+	 * @author	Andrea Marco Sartori
+	 * @var		array	$logoutPipes	List of pipes for the logout process.
+	 */
+	protected $logoutPipes = ['DispatchEvent'];
+
+	/**
+	 * @author	Andrea Marco Sartori
+	 * @var		array	$registerPipes	List of pipes for the register process.
+	 */
+	protected $registerPipes = ['DispatchEvent', 'Login', 'Notify', 'Hash'];
+
+	/**
+	 * @author	Andrea Marco Sartori
+	 * @var		array	$recoverPipes	List of pipes for the password recover process.
+	 */
+	protected $recoverPipes = ['DispatchEvent', 'Notify', 'Store'];
+
+	/**
+	 * @author	Andrea Marco Sartori
+	 * @var		array	$resetPipes	List of pipes for the password reset process.
+	 */
+	protected $resetPipes = ['DispatchEvent'];
 	
 	/**
 	 * Set the dependencies.
