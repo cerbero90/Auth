@@ -24,10 +24,11 @@ List of features included in this package:
 + Registration
 + Password reset
 + Logout
-+ [High customization](https://github.com/cerbero90/Auth/blob/master/config/_auth.php)
++ [Full customization](https://github.com/cerbero90/Auth/blob/master/config/_auth.php)
 + CSRF protection 
 + Honeypot trap
 + Login throttling
++ Event dispatching
 
 ## Install
 
@@ -84,3 +85,19 @@ So now you can display the custom messages in your views:
 	<div class="alert alert-success">{{ $success }}</div>
 @endif
 ```
+
+
+## Events
+
+All authentication processes are preceded and followed by events to provide an easy way to extend the package functionalities. The following list shows all the available events:
+
++ auth.login.start
++ auth.login.end
++ auth.logout.start
++ auth.logout.end
++ auth.register.start
++ auth.register.end
++ auth.recover.start
++ auth.recover.end
++ auth.reset.start
++ auth.reset.end
