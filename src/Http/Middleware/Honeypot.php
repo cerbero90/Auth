@@ -41,7 +41,7 @@ class Honeypot
 	 */
 	protected function checkHoneypot($value)
 	{
-		if($value != null)
+		if($value !== null)
 		{
 			throw new DisplayException('auth::honeypot.error');
 		}
