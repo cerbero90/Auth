@@ -1,8 +1,5 @@
 <?php
 
-Route::when('*', 'csrf', ['POST', 'PUT', 'PATCH', 'DELETE']);
-
-
 Route::group(['prefix' => config('_auth.routes_prefix')], function()
 {
 	Route::group(['middleware' => ['guest', 'honeypot']], function()
