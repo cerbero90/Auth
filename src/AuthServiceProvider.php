@@ -39,6 +39,8 @@ class AuthServiceProvider extends ServiceProvider {
 		$this->registerUserRepository();
 
 		$this->registerThrottler();
+
+		$this->registerDispatcher();
 	}
 
 	/**
@@ -65,6 +67,19 @@ class AuthServiceProvider extends ServiceProvider {
 		$throttler = 'Cerbero\Auth\Services\Throttling\CachingThrottler';
 
 		$this->app->bind('Cerbero\Auth\Services\Throttling\ThrottlerInterface', $throttler);
+	}
+
+	/**
+	 * Register the dispatcher service.
+	 *
+	 * @author	Andrea Marco Sartori
+	 * @return	void
+	 */
+	private function registerDispatcher()
+	{
+		$dispatcher = 'Cerbero\Auth\Services\Dispatcher\MarshalDispatcher';
+
+		$this->app->bind('Cerbero\Auth\Services\Dispatcher\DispatcherInterface', $dispatcher);
 	}
 
 }
