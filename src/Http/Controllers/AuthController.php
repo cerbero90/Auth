@@ -9,14 +9,14 @@ use Cerbero\Auth\Http\Requests\LoginRequest;
 use Cerbero\Auth\Http\Requests\RecoverRequest;
 use Cerbero\Auth\Http\Requests\RegisterRequest;
 use Cerbero\Auth\Http\Requests\ResetRequest;
-use Illuminate\Contracts\Bus\Dispatcher;
+use Cerbero\Auth\Services\Dispatcher\DispatcherInterface;
 use Illuminate\Routing\Controller;
 
 class AuthController extends Controller {
 
 	/**
 	 * @author	Andrea Marco Sartori
-	 * @var		Illuminate\Contracts\Bus\Dispatcher	$bus	Bus dispatcher.
+	 * @var		Cerbero\Auth\Services\Dispatcher\DispatcherInterface	$bus	Bus dispatcher.
 	 */
 	protected $bus;
 
@@ -54,10 +54,10 @@ class AuthController extends Controller {
 	 * Set the dependencies.
 	 *
 	 * @author	Andrea Marco Sartori
-	 * @param	Illuminate\Contracts\Bus\Dispatcher	$bus
+	 * @param	Cerbero\Auth\Services\Dispatcher\DispatcherInterface	$bus
 	 * @return	void
 	 */
-	public function __construct(Dispatcher $bus)
+	public function __construct(DispatcherInterface $bus)
 	{
 		$this->bus = $bus;
 	}
