@@ -61,6 +61,32 @@ class MarshalDispatcher implements DispatcherInterface
     }
 
     /**
+     * Dispatch a command to its appropriate handler.
+     *
+     * @author Andrea Marco Sartori
+     * @param  mixed  $command
+     * @param  \Closure|null  $afterResolving
+     * @return mixed
+     */
+    public function dispatch($command)
+    {
+        $this->dispatcher->dispatch($command);
+    }
+
+    /**
+     * Dispatch a command to its appropriate handler in the current process.
+     *
+     * @author Andrea Marco Sartori
+     * @param  mixed  $command
+     * @param  \Closure|null  $afterResolving
+     * @return mixed
+     */
+    public function dispatchNow($command)
+    {
+        $this->dispatcher->dispatchNow($command);
+    }
+
+    /**
      * Marshal a command and dispatch it.
      *
 	 * @author	Andrea Marco Sartori
@@ -75,7 +101,7 @@ class MarshalDispatcher implements DispatcherInterface
 
     	$this->values = array_merge((array) $source, $extras);
 
-    	return $this->dispatcher->dispatch($this->marshal());
+    	return $this->dispatch($this->marshal());
     }
 
     /**
